@@ -1,19 +1,6 @@
-import { type ZodRouter } from 'koa-zod-router'
-import booksList from './list'
-import createOrUpdateBook from './create_or_update'
-import deleteBook from './delete'
-import getBookRoute from './lookup'
-
-export function setupBookRoutes (router: ZodRouter): void {
-  // Setup Book List Route
-  booksList(router)
-
-  // Setup Book Create Route
-  createOrUpdateBook(router)
-
-  // Setup Book Delete Route
-  deleteBook(router)
-
-  // Lookup Book
-  getBookRoute(router)
-}
+// Re-export types and functions for backward compatibility
+export { getBook } from './lookup';
+export { listBooks } from './list';
+export { createBook, updateBook, createOrUpdateBook } from './create';
+export { deleteBook } from './delete';
+export type { Book, BookID, BookFilter } from './books.route';
