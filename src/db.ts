@@ -5,6 +5,8 @@ import { type Book } from '../adapter/assignment-3';
 // Lazy-loaded client to ensure test setup can set MONGO_URI before client creation
 let _client: MongoClient | null = null;
 
+const DATABASE_NAME = "mcmasterful-books"
+
 function getUri(): string {
   return (global as Record<string, unknown>).MONGO_URI as string ?? 'mongodb://mongo';
 }
@@ -37,9 +39,9 @@ export function getBookDatabase(dbName?: string): BookDatabaseAccessor {
   const database = mongoClient.db(
     dbName ?? (isTestEnvironment()
       ? Math.floor(Math.random() * 100000).toString()
-      : 'bookstore')
+      : DATABASE_NAME)
   );
-  const books = database.collection<Book>('books');
+  const books = database.collection<Book>(DATABASE_NAME);
 
   return {
     database,
@@ -52,6 +54,6 @@ if (import.meta.vitest !== undefined) {
 
   test('Can Setup Test DB', () => {
     const { database } = getBookDatabase();
-    expect(database.databaseName, `URI: ${getUri()}, DB: ${database.databaseName}`).not.toEqual('mcmasterful-books');
+    expect(database.databaseName, `URI: ${getUri()}, DB: ${database.databaseName}`).not.toEqual(DATABASE_NAME);
   });
 }
