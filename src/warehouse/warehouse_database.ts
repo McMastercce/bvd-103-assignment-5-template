@@ -11,7 +11,7 @@ export interface WarehouseDatabaseAccessor {
 }
 
 export async function getWarehouseDatabase (): Promise<WarehouseDatabaseAccessor> {
-  const database = client.db((global as any).MONGO_URI !== undefined ? Math.floor(Math.random() * 100000).toPrecision() : 'mcmasterful-warehouse');
+  const database = client.db((global as { MONGO_URI?: string }).MONGO_URI !== undefined ? Math.floor(Math.random() * 100000).toPrecision() : 'mcmasterful-warehouse');
   const books = database.collection<{ book: BookID, shelf: ShelfId, count: number }>('books');
   await books.createIndex({ book: 1, shelf: 1 }, { unique: true });
   const orders = database.collection<{ books: Record<BookID, number> }>('orders');

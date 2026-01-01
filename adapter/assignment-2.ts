@@ -1,4 +1,4 @@
-import previous_assignment from './assignment-1'
+import previous_assignment from './assignment-1';
 
 export type BookID = string
 
@@ -12,7 +12,7 @@ export interface Book {
 };
 
 async function listBooks (filters?: Array<{ from?: number, to?: number }>): Promise<Book[]> {
-  return await previous_assignment.listBooks(filters)
+  return await previous_assignment.listBooks(filters);
 }
 
 async function createOrUpdateBook (book: Book): Promise<BookID> {
@@ -22,29 +22,29 @@ async function createOrUpdateBook (book: Book): Promise<BookID> {
     headers: {
       'Content-Type': 'application/json'
     }
-  })
+  });
 
   if (result.ok) {
-    const res = await result.json() as { id: BookID }
-    return res.id
+    const res = await result.json() as { id: BookID };
+    return res.id;
   } else {
-    throw new Error('Failed to create or update book')
+    throw new Error('Failed to create or update book');
   }
 }
 
 async function removeBook (book: BookID): Promise<void> {
-  const result = await fetch(`http://localhost:3000/books/${book}`, { method: 'DELETE' })
+  const result = await fetch(`http://localhost:3000/books/${book}`, { method: 'DELETE' });
 
   if (!result.ok) {
-    throw new Error('Failed to create or update book')
+    throw new Error('Failed to create or update book');
   }
 }
 
-const assignment = 'assignment-2'
+const assignment = 'assignment-2';
 
 export default {
   assignment,
   createOrUpdateBook,
   removeBook,
   listBooks
-}
+};

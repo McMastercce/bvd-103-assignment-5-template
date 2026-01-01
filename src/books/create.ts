@@ -127,7 +127,7 @@ if (import.meta.vitest !== undefined) {
 
   test('updating a non-existent book returns not_found', async () => {
     const db = getBookDatabase();
-    const id = generateId();
+    const id: BookID = generateId();
 
     const updateInput: UpdateBookInput = {
       id,

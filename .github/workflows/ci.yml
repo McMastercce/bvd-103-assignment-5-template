@@ -23,7 +23,7 @@ jobs:
               with:
                 node-version: '20'           
             - run: npm install
-            - run: npm run check-types
+            - run: npm run type-check
 
     test:
         runs-on: ubuntu-latest

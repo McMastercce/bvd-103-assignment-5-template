@@ -52,7 +52,7 @@ if (import.meta.vitest !== undefined) {
 
   test('deleting a non-existent book returns not_found', async () => {
     const db = getBookDatabase();
-    const id = generateId();
+    const id: BookID = generateId();
 
     const result = await deleteBook(id, db);
 

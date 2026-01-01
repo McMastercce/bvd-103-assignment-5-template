@@ -5,7 +5,7 @@ import { type Book } from '../adapter/assignment-3';
 // Lazy-loaded client to ensure test setup can set MONGO_URI before client creation
 let _client: MongoClient | null = null;
 
-const DATABASE_NAME = "mcmasterful-books"
+const DATABASE_NAME = 'mcmasterful-books';
 
 function getUri(): string {
   return (global as Record<string, unknown>).MONGO_URI as string ?? 'mongodb://mongo';

@@ -58,7 +58,7 @@ async function placeBooksOnShelf(
   shelf: ShelfId
 ): Promise<void> {
   if (numberOfBooks < 0) {
-    throw new Error("Can't place less than 0 books on a shelf");
+    throw new Error('Can\'t place less than 0 books on a shelf');
   }
   const current = (await data.getCopiesOnShelf(bookId, shelf)) ?? 0;
   await data.placeBookOnShelf(bookId, shelf, current + numberOfBooks);
@@ -157,7 +157,7 @@ export class WarehouseController extends Controller {
     try {
       const data = await getDefaultWarehouseData();
       return await getBookInfo(data, book);
-    } catch (e) {
+    } catch {
       this.setStatus(500);
       throw new Error('Server error');
     }
@@ -180,7 +180,7 @@ export class WarehouseController extends Controller {
     try {
       const data = await getDefaultWarehouseData();
       await placeBooksOnShelf(data, book, number, shelf);
-    } catch (e) {
+    } catch {
       this.setStatus(500);
       throw new Error('Server error');
     }
@@ -204,7 +204,7 @@ export class OrderController extends Controller {
       const result = await listOrders(data);
       this.setStatus(201);
       return result;
-    } catch (e) {
+    } catch {
       this.setStatus(500);
       throw new Error('Server error');
     }
@@ -226,7 +226,7 @@ export class OrderController extends Controller {
       const orderId = await placeOrder(data, requestBody.order);
       this.setStatus(201);
       return orderId;
-    } catch (e) {
+    } catch {
       this.setStatus(500);
       throw new Error('Server error');
     }
@@ -253,7 +253,7 @@ export class FulfilController extends Controller {
     try {
       const data = await getDefaultWarehouseData();
       await fulfilOrder(data, order, requestBody);
-    } catch (e) {
+    } catch {
       this.setStatus(500);
       throw new Error('Server error');
     }

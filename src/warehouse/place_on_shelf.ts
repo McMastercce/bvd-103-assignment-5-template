@@ -3,7 +3,7 @@ import { InMemoryWarehouse, type WarehouseData } from './warehouse_data';
 
 async function placeBooksOnShelf (data: WarehouseData, bookId: BookID, numberOfBooks: number, shelf: ShelfId): Promise<void> {
   if (numberOfBooks < 0) {
-    throw new Error("Can't place less than 0 books on a shelf");
+    throw new Error('Can\'t place less than 0 books on a shelf');
   }
   const current = await data.getCopiesOnShelf(bookId, shelf) ?? 0;
   await data.placeBookOnShelf(bookId, shelf, current + numberOfBooks);
